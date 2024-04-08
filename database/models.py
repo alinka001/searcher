@@ -1,6 +1,6 @@
-from sqlalchemy import Column, ForeignKey, Integer, Text, DATETIME
+from sqlalchemy import Column, Integer, Text, DATETIME
 
-from database import Base
+from database.database import Base
 
 class Post(Base):
     # - `id` - уникальный для каждого документа;

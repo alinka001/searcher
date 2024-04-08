@@ -1,7 +1,4 @@
-from os import name
-from typing import Union
-from database import engine, SessionLocal
-import models
+from database import engine, SessionLocal, models
 from fastapi import FastAPI
 
 app = FastAPI()
