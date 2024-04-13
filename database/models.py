@@ -1,6 +1,7 @@
-from sqlalchemy import Column, Integer, Text, DATETIME
+from sqlalchemy import Column, Integer, Text, TIMESTAMP
+from sqlalchemy.ext.declarative import declarative_base
 
-from database.database import Base
+Base = declarative_base()
 
 class Post(Base):
     # - `id` - уникальный для каждого документа;
@@ -13,4 +14,4 @@ class Post(Base):
     id = Column(Integer, primary_key=True)
     rubrics = Column(Text, index=True)
     text = Column(Text)
-    created_date = Column(DATETIME)
+    created_date = Column(TIMESTAMP)

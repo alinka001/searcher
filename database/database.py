@@ -1,17 +1,22 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
+import databases
+from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
+from fastapi import FastAPI
 
+app = FastAPI()
 
-SQLALCHEMY_DATABASE_URL = "postgresql://user:password@postgresserver/db"
+# Параметры подключения к базе данных
+DATABASE_URL = "postgresql://postgres:alina5567@LocalHost/posts"
 
-engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
-)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+# Создание экземпляров databases.Database и databases.DatabaseURL
+database = databases.Database(DATABASE_URL)
+metadata = MetaData()
 
-Base = declarative_base()
+@app.on_event("startup")
+async def startup():
+    await database.connect()
+    engine = create_engine(DATABASE_URL)
+    metadata.create_all(engine)
 
-def create_database():
-    with SessionLocal() as session:
-        Base.metadata.create_all(bind=engine)
+@app.on_event("shutdown")
+async def shutdown():
+    await database.disconnect()

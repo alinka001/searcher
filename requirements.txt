@@ -1,2 +1,8 @@
-sqlalchemy
-elastic-apm
+ecs-logging==2.1.0
+elastic-apm==6.21.4.post8347027212
+fastapi==0.110.0
+psycopg2==2.9.9
+SQLAlchemy==2.0.29
+starlette==0.36.3
+uvicorn==0.29.0
+
